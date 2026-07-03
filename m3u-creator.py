@@ -66,7 +66,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
         # influence the order in which the directory tree is recursed
 
         # Sort the subdirectories and folders
-        if sortmethod == 'alphabetical':
+        if sortmethod == 'ascii':
             subdirs.sort()
             files.sort()
         elif sortmethod == 'natural' and natsorted is not None:
@@ -101,7 +101,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
         if filtering_dict['file-include']:
             filtered_files = [ f for f in filtered_files if any(w.lower() in f.lower() for w in filtering_dict['file-include']) ]
         if filtering_dict['file-exclude']:
-            filtered_files = [ f for f in filtered_files if any(w.lower() not in f.lower() for w in filtering_dict['file-exclude']) ]
+            filtered_files = [ f for f in filtered_files if not any(w.lower() in f.lower() for w in filtering_dict['file-exclude']) ]
 
         filtered_files = [ os.path.join(path, f) for f in filtered_files if os.path.splitext(f)[-1] in filtering_dict['filetypes'] ]
         found_files = len(filtered_files)
