@@ -113,7 +113,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
     return (results, ec)
 
 
-def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=False):
+def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=False, append=False):
     '''Create the M3U playlist. Include EXTM3U and EXTINF if requested.
     EXTINF tags are of format: #EXTINF:LENGTH, ARTIST - TRACK'''
 
@@ -124,9 +124,17 @@ def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=Fa
         extended_m3u = False
         ec = 2
 
-    with open(playlist, 'w', encoding='utf-8') as f:
+    if os.path.exists(playlist) and append:
+        mode = 'a'
+    else:
+        mode = 'w'
+
+    with open(playlist, mode, encoding='utf-8') as f:
         if extended_m3u:
-            f.write("#EXTM3U\n")
+            if mode == 'w':
+                # Write extended M3U header
+                f.write("#EXTM3U\n")
+
             for filepath in filelist:
                 # Read the file length, artist and title from metadata
                 # Fall back to the album artist if artist is blank for some reason
@@ -193,6 +201,11 @@ if __name__ == '__main__':
 
     # Playlist structure
     parser.add_argument(
+        "-a","--append",
+        action="store_true",
+        default=False,
+        help="Append to an existing playlist file rather than overwrite")
+    parser.add_argument(
         "-e","--extm3u",
         action="store_true",
         default=False,
@@ -220,5 +233,5 @@ if __name__ == '__main__':
 
     (mediafiles, ec1) = searchDirectoryTree(args.top_directory, filter_dict, args.sort_method)
     # pylint: disable-next=C0103
-    ec2 = buildPlaylist(mediafiles, args.playlist, args.top_directory, args.relative, args.extm3u)
+    ec2 = buildPlaylist(mediafiles, args.playlist, args.top_directory, args.relative, args.extm3u, args.append)
     sys.exit(ec1 or ec2)
