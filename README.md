@@ -44,6 +44,7 @@ Optional arguments:
 | -s, --sort-method | ascii | Specify which sort method to use on the playlist. The default behaviour is 'ascii', which tries to match the default Unix ls and Windows Explorer (pre Windows 10) sort order. If the `natsort` package is installed, you can also specify 'natural' as the sort order. 'unsorted' uses the default behaviour of `os.walk`. |
 | -r, --relative | | Boolean flag to force the use of relative paths in the playlist (paths will be relative to the starting top level directory). Default behaviour is to use absolute paths. |
 | -e, --extm3u | | Boolean flag to request the inclusion of EXTM3U and EXTINF tags in the playlist. Requires the `music-tag` package. |
+| -a, --append | | Boolean flag to instruct the script to append to an existing playlist (if it exists) rather than overwrite it. |
 
 
 # Copyright and Licence

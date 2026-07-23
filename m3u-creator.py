@@ -114,6 +114,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
 
 
 def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=False, append=False):
+    # pylint: disable=too-many-arguments, too-many-positional-arguments
     '''Create the M3U playlist. Include EXTM3U and EXTINF if requested.
     EXTINF tags are of format: #EXTINF:LENGTH, ARTIST - TRACK'''
 
