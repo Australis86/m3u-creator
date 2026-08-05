@@ -129,6 +129,9 @@ def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=Fa
         mode = 'a'
     else:
         mode = 'w'
+    
+    # Get the absolute path for the playlist file (required for relative paths)
+    playlist_path = os.path.dirname(os.path.abspath(playlist))
 
     with open(playlist, mode, encoding='utf-8') as f:
         if extended_m3u:
@@ -147,13 +150,13 @@ def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=Fa
                 # Write the playlist entry
                 f.write(f'#EXTINF:{track_length},{artist} - {track_title}\n')
                 if relpaths:
-                    f.write(os.path.relpath(filepath, start=init_path) + '\n')
+                    f.write(os.path.relpath(filepath, start=playlist_path) + '\n')
                 else:
                     f.write(filepath + '\n')
         else:
             for filepath in filelist:
                 if relpaths:
-                    f.write(os.path.relpath(filepath, start=init_path) + '\n')
+                    f.write(os.path.relpath(filepath, start=playlist_path) + '\n')
                 else:
                     f.write(filepath + '\n')
 
