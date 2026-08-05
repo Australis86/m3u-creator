@@ -113,8 +113,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
     return (results, ec)
 
 
-def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=False, append=False):
-    # pylint: disable=too-many-arguments, too-many-positional-arguments
+def buildPlaylist(filelist, playlist, relpaths=False, extended_m3u=False, append=False):
     '''Create the M3U playlist. Include EXTM3U and EXTINF if requested.
     EXTINF tags are of format: #EXTINF:LENGTH, ARTIST - TRACK'''
 
@@ -129,7 +128,7 @@ def buildPlaylist(filelist, playlist, init_path, relpaths=False, extended_m3u=Fa
         mode = 'a'
     else:
         mode = 'w'
-    
+
     # Get the absolute path for the playlist file (required for relative paths)
     playlist_path = os.path.dirname(os.path.abspath(playlist))
 
@@ -237,5 +236,5 @@ if __name__ == '__main__':
 
     (mediafiles, ec1) = searchDirectoryTree(args.top_directory, filter_dict, args.sort_method)
     # pylint: disable-next=C0103
-    ec2 = buildPlaylist(mediafiles, args.playlist, args.top_directory, args.relative, args.extm3u, args.append)
+    ec2 = buildPlaylist(mediafiles, args.playlist, args.relative, args.extm3u, args.append)
     sys.exit(ec1 or ec2)
