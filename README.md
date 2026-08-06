@@ -42,7 +42,7 @@ Optional arguments:
 | --directory-exclude | "Artist Name" "Album Name" | This restricts the contents of the playlist to directory paths that do _not_ any of the keywords or phrases specified. This works best if you have your library in directories by artist, album or audiobook. Case-insensitive. Overrides inclusion list. |
 | --directory-include | "Artist Name" "Album Name" | This restricts the contents of the playlist to directory paths that _must_ include one of the keywords or phrases specified. This works best if you have your library in directories by artist, album or audiobook. Case-insensitive. |
 | -s, --sort-method | ascii | Specify which sort method to use on the playlist. The default behaviour is 'ascii', which tries to match the default Unix ls and Windows Explorer (pre Windows 10) sort order. If the `natsort` package is installed, you can also specify 'natural' as the sort order. 'unsorted' uses the default behaviour of `os.walk`. |
-| -r, --relative | | Boolean flag to force the use of relative paths in the playlist (paths will be relative to the starting top level directory). Default behaviour is to use absolute paths. |
+| -r, --relative | | Boolean flag to force the use of relative paths in the playlist (paths will be relative to the playlist location). Default behaviour is to use absolute paths. |
 | -e, --extm3u | | Boolean flag to request the inclusion of EXTM3U and EXTINF tags in the playlist. Requires the `music-tag` package. |
 | -a, --append | | Boolean flag to instruct the script to append to an existing playlist (if it exists) rather than overwrite it. |
 
