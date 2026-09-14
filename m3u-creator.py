@@ -85,7 +85,7 @@ def searchDirectoryTree(init_path, filtering_dict, sortmethod='ascii'):
         #   2. if exclude list is present, check the path and disregard
         #      present directory if there are any matches
         inclusion_test = filtering_dict['directory-include'] and not any(w.lower() in path.lower() for w in filtering_dict['directory-include'])
-        exclusion_test = filtering_dict['directory-exclude'] and any(w.lower() in path.lower() in path for w in filtering_dict['directory-exclude'])
+        exclusion_test = filtering_dict['directory-exclude'] and any(w.lower() in path.lower() for w in filtering_dict['directory-exclude'])
         if inclusion_test or exclusion_test:
             continue
 
